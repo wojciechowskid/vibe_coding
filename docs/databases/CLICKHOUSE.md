@@ -9,18 +9,21 @@ Tables are created manually via [migrations](./MIGRATIONS.md) using native Click
 
 All queries use the `SQL` component with `.clickhouse` executor (see [RAW_SQL.md](./RAW_SQL.md) for details).
 
+The `Query(model=...)` accepts any typed object: `TypedDict`, `DataTransferObject`, `ValueObject`, etc. 
+Prefer using domain DTOs over `TypedDict` when the result is used beyond the repository.
+
 **Example:**
 ```python
 from datetime import datetime
-from typing import TypedDict
 
+from dddesign.structure.domains.dto import DataTransferObject
 from dddesign.structure.infrastructure.repositories import Repository
 from ddsql.query import Query
 
 from config.databases.services.sql import SQL
 
 
-class ProfileAnalytics(TypedDict):
+class ProfileAnalytics(DataTransferObject):
     profile_id: int
     total_events: int
     last_event_at: datetime
