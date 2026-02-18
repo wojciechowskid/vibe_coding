@@ -19,11 +19,25 @@ See implementation examples:
 ### Allowed Methods
 
 By default, only these methods are allowed for external access:
-`{'get', 'get_list', 'create', 'update', 'delete'}`
 
-Use `EXTERNAL_ALLOWED_METHODS` to allow additional methods.
+| Method | Description |
+|---|---|
+| `get` | Returns one entity by PK |
+| `get_by_filters` | Returns one entity matching filters |
+| `get_list` | Returns a list of entities |
+| `get_map` | Returns a mapping of entities (e.g. `{pk: entity}`) |
+| `create` | Creates one entity, accepts entity |
+| `update` | Updates one entity, accepts entity |
+| `delete` | Deletes one entity by PK |
+| `bulk_create` | Creates multiple entities, accepts a collection of entities |
+| `bulk_update` | Updates multiple entities, accepts a collection of entities |
+| `bulk_delete` | Deletes multiple entities, accepts a collection of PKs |
+| `update_by_filters` | Updates entities matching filters |
+| `delete_by_filters` | Deletes entities matching filters |
+
+Use `EXTERNAL_ALLOWED_METHODS` to allow additional methods beyond this set.
 
 ```python
 class ProfileRepository(Repository):
-    EXTERNAL_ALLOWED_METHODS: set[str] | None = {'get_by_filters'}
+    EXTERNAL_ALLOWED_METHODS: set[str] | None = {'upsert'}
 ```
