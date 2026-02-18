@@ -24,13 +24,10 @@ metadata = MetaData(naming_convention=NAMING_CONVENTION)  # type: ignore
 
 
 class BaseSQLModelMeta(SQLModelMetaclass):
-    def __new__(mcs, name: str, bases: tuple[type, ...], namespace: dict[str, Any], **kwargs: Any) -> Any:
-        new_cls = super().__new__(mcs, name, bases, namespace, **kwargs)
+    def __new__(cls, name: str, bases: tuple[type, ...], namespace: dict[str, Any], **kwargs: Any) -> Any:
+        new_cls = super().__new__(cls, name, bases, namespace, **kwargs)
         if kwargs.get('table') and not hasattr(new_cls, '_entity_class'):
-            raise TypeError(
-                f'{name} must specify entity type: '
-                f'class {name}(BaseSQLModel[YourEntity], table=True)'
-            )
+            raise TypeError(f'{name} must specify entity type: ' f'class {name}(BaseSQLModel[YourEntity], table=True)')
         return new_cls
 
 
@@ -43,7 +40,7 @@ class BaseSQLModel(SQLModel, Generic[EntityT], metaclass=BaseSQLModelMeta):
     def __tablename__(cls) -> str:  # noqa: N805
         return convert_camel_case_to_snake_case(cls.__name__)
 
-    def __class_getitem__(cls, params):
+    def __class_getitem__(cls, params: type[Any] | tuple[type[Any], ...]) -> Any:  # type: ignore[invalid-method-override]
         result = super().__class_getitem__(params)
         if not isinstance(params, TypeVar):
             result._entity_class = params

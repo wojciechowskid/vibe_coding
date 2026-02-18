@@ -17,7 +17,7 @@ class PostgresAdapter(Adapter):
     async def _execute(self) -> list[dict[str, Any]]:
         async with Atomic() as postgres_session:
             query = await self.get_query()
-            result = await postgres_session.execute(text(query))  # ty: ignore[deprecated]
+            result = await postgres_session.execute(text(query))
             return [dict(zip(result.keys(), row)) for row in result.fetchall()]
 
 
