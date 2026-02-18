@@ -19,7 +19,7 @@ exclude = [
 
 [rules]
 unused-type-ignore-comment = "ignore"
-deprecated = "warn"
+deprecated = "ignore"
 
 [analysis]
 allowed-unresolved-imports = [
