@@ -25,6 +25,7 @@ class Database(str, BaseEnum):
     @property
     def url(self) -> str:
         clickhouse_url = re.sub(r'^.*?://', 'clickhouse+native://', str(settings.CLICKHOUSE_URL))
+        clickhouse_url = clickhouse_url.replace(':8123/', ':9000/')
         return {self.POSTGRES: str(settings.POSTGRES_URL), self.CLICKHOUSE: clickhouse_url}[self]
 
     @property
