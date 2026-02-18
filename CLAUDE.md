@@ -23,6 +23,7 @@ Service commands are defined in `src/manage.py` (runserver, runworker, runschedu
 - **Don't create empty modules**: only create directories/modules when they contain actual code. Don't pre-create empty structures "for future use"
 - **`@classmethod` return type**: always use `Self` (from `typing`) as return type for classmethods that return an instance of the class
 - **SQLAlchemy models**: use simple types (`str`, `int`, `bool`, etc.) for columns, not enums or complex types. All validation is done at the code level (entities, services)
+- **Dramatiq tasks**: task name = `<application>_<method>_task`, periodic = `<application>_<method>_periodic_task`. Always read `docs/conventions/BACKGROUND_WORKER.md` before creating tasks
 
 ## Documentation
 
