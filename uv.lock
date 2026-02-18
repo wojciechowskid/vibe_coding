@@ -272,7 +272,7 @@ wheels = [
 
 [[package]]
 name = "dddesign"
-version = "1.1.7"
+version = "1.1.10"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ddutils" },
@@ -280,31 +280,31 @@ dependencies = [
     { name = "pydantic" },
     { name = "setuptools" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/56/8d/6c7f3209305ea13e191e83e03d1809e21a39924569f58cf8831bf6ff9ced/dddesign-1.1.7.tar.gz", hash = "sha256:b7cff0e12d3e92350df83673a8d326d931606ad0514edd0f75bfbf5196ecd2fc", size = 20722, upload-time = "2025-06-03T17:10:28.942Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/62/5f/d05830c8d226b3850e15d09e8bdca979e3a5f6f1cae9b884e1031ce68607/dddesign-1.1.10.tar.gz", hash = "sha256:07e5fa994cfc94313c88b1a51dc4c80f8b08d43545cebf4139debb85dd9c4c51", size = 19598, upload-time = "2026-02-15T12:47:59.99Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/12/e3/23f3cedb9bc4d29ff7753ba92892edf7107bb699f6daa5cd4bd8ede1289c/dddesign-1.1.7-py3-none-any.whl", hash = "sha256:e8ed27b2ccfc0360a4aea115305e12f7dc8c2ee8024e6cdeae9fc9a5b8493ca5", size = 28112, upload-time = "2025-06-03T17:10:27.552Z" },
+    { url = "https://files.pythonhosted.org/packages/e3/b0/4eda1323b0e6adad903f1d4656cc1b965499c05817f761f4ec361f4619fc/dddesign-1.1.10-py3-none-any.whl", hash = "sha256:12ee861dfaa3adf19f75a8ac7bddc160a94a88b3a095b4bda9d09740dcc41309", size = 28277, upload-time = "2026-02-15T12:47:58.441Z" },
 ]
 
 [[package]]
 name = "ddsql"
-version = "0.0.1"
+version = "0.0.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ddutils" },
     { name = "jinja2" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b8/4e/2f061cbd2333955a01d2133da3a191bf7d7cc5b0aba98076110c60c92f0d/ddsql-0.0.1.tar.gz", hash = "sha256:406658529f884c1ee8d7b2321991330e934f7014f2c1862a1ab2939e44243742", size = 6504, upload-time = "2025-12-14T18:39:29.067Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5a/2e/3ad78b9dbeecbc25e9aa414d11ef920e78acbf5dd25c9bf8e4e65a7ba194/ddsql-0.0.2.tar.gz", hash = "sha256:94d16d41615676493f2a9a8b0753c5f99dee86cdc46d29a2b2d6ed549a95d1a2", size = 6515, upload-time = "2026-02-14T21:23:30.982Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e5/fd/f08b97e170387ce65415faaebc7d3ac743b0148d3df93134be36dba49ddf/ddsql-0.0.1-py3-none-any.whl", hash = "sha256:29f3609948fa57aecc9841bccef96a948ed6cc7049a6796a65739943074d2daa", size = 9272, upload-time = "2025-12-14T18:39:27.616Z" },
+    { url = "https://files.pythonhosted.org/packages/b8/0f/6bfcbe3f4c2a980c7f7763c57ecead26f598b18f553f59d173fdf2190bc0/ddsql-0.0.2-py3-none-any.whl", hash = "sha256:1286b29c1b9b832624cc3af4d2a02875d4808a4171afd47e9d14613f5a41867a", size = 9299, upload-time = "2026-02-14T21:23:29.539Z" },
 ]
 
 [[package]]
 name = "ddutils"
-version = "0.1.1"
+version = "0.1.4"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/ba/61/e5aa55a00f3343270fa5e5127117a39d99a4f8261446ee4f1e82711c5296/ddutils-0.1.1.tar.gz", hash = "sha256:b5f32f105a127501966db3ce49d165541da444ec9358ee53f6ad7d8559d3d17a", size = 7068, upload-time = "2025-06-05T08:35:36.193Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f7/db/782be5e9bba53889d65e07115d9dd0eebee3d3924cf2d3dea8a191c2a551/ddutils-0.1.4.tar.gz", hash = "sha256:17ecda8c3e01ffaad2bc40001b93234a764d2466e60c60a0f77839cb412ab64a", size = 11620, upload-time = "2026-01-04T17:46:05.244Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/26/a2/51c9fa9d5e3b08788ec613aebd16b94120059d771c508092757b5d8f212c/ddutils-0.1.1-py3-none-any.whl", hash = "sha256:5c14b38e4b16617d69aa5122af967d377ccd0b8da4653964fa6ba3fb8d92b443", size = 9826, upload-time = "2025-06-05T08:35:34.604Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/65/bfc2c9e7d53794ad98d66c35a8d26b31f99429ee234aecc62ec383c10584/ddutils-0.1.4-py3-none-any.whl", hash = "sha256:324d1d22990c9b6dac1cc74026f51ef835cb945a2de5eee700c3760763768f3c", size = 12943, upload-time = "2026-01-04T17:46:03.786Z" },
 ]
 
 [[package]]
@@ -649,37 +649,6 @@ wheels = [
 ]
 
 [[package]]
-name = "mypy"
-version = "1.1.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "mypy-extensions" },
-    { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/62/54/be80f8d01f5cf72f774a77f9f750527a6fa733f09f78b1da30e8fa3914e6/mypy-1.1.1.tar.gz", hash = "sha256:ae9ceae0f5b9059f33dbc62dea087e942c0ccab4b7a003719cb70f9b8abfa32f", size = 2778293, upload-time = "2023-03-07T02:14:08.723Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/a4/0b/3a30f50287e42a4230320fa2eac25eb3017d38a7c31f083d407ab627607c/mypy-1.1.1-py3-none-any.whl", hash = "sha256:4e4e8b362cdf99ba00c2b218036002bdcdf1e0de085cdb296a49df03fb31dfc4", size = 2373884, upload-time = "2023-03-07T02:13:00.399Z" },
-]
-
-[[package]]
-name = "mypy-extensions"
-version = "1.1.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a2/6e/371856a3fb9d31ca8dac321cda606860fa4548858c0cc45d9d1d4ca2628b/mypy_extensions-1.1.0.tar.gz", hash = "sha256:52e68efc3284861e772bbcd66823fde5ae21fd2fdb51c62a211403730b916558", size = 6343, upload-time = "2025-04-22T14:54:24.164Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/79/7b/2c79738432f5c924bef5071f933bcc9efd0473bac3b4aa584a6f7c1c8df8/mypy_extensions-1.1.0-py3-none-any.whl", hash = "sha256:1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505", size = 4963, upload-time = "2025-04-22T14:54:22.983Z" },
-]
-
-[[package]]
-name = "mypy-gitlab-code-quality"
-version = "1.1.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/b0/f8/da1b4609553ab07712490b9da8eda2de70805c113070833361aabf01ba83/mypy-gitlab-code-quality-1.1.0.tar.gz", hash = "sha256:be06b0def23b11f9ba10dda368cdb15f6320b9beb59b02d72642185630ee80e1", size = 4432, upload-time = "2023-11-17T16:48:51.495Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/73/db/b55c0169f6df6dc3cf7d0102a94c6bbb975b248d79385f91e0dbc2251cc5/mypy_gitlab_code_quality-1.1.0-py3-none-any.whl", hash = "sha256:9890808b69a9e079ee852c482612c10008b39c767c96c5bab55aa9a0a4a970ba", size = 5343, upload-time = "2023-11-17T16:48:50.006Z" },
-]
-
-[[package]]
 name = "packaging"
 version = "26.0"
 source = { registry = "https://pypi.org/simple" }
@@ -752,8 +721,6 @@ dev = [
     { name = "import-linter" },
     { name = "ipdb" },
     { name = "ipython" },
-    { name = "mypy" },
-    { name = "mypy-gitlab-code-quality" },
     { name = "ruff" },
     { name = "ty" },
 ]
@@ -765,9 +732,9 @@ requires-dist = [
     { name = "apscheduler", specifier = "==3.10.4" },
     { name = "clickhouse-connect", specifier = "==0.8.16" },
     { name = "clickhouse-sqlalchemy", specifier = "==0.3.2" },
-    { name = "dddesign", specifier = "==1.1.7" },
-    { name = "ddsql", specifier = "==0.0.1" },
-    { name = "ddutils", specifier = "==0.1.1" },
+    { name = "dddesign", specifier = "==1.1.10" },
+    { name = "ddsql", specifier = "==0.0.2" },
+    { name = "ddutils", specifier = "==0.1.4" },
     { name = "dramatiq", extras = ["prometheus", "redis", "watch"], specifier = "==2.0.1" },
     { name = "fastapi", specifier = "==0.115.3" },
     { name = "httpx", specifier = "==0.28.1" },
@@ -789,8 +756,6 @@ dev = [
     { name = "import-linter", specifier = "==1.12.1" },
     { name = "ipdb", specifier = "==0.13.9" },
     { name = "ipython", specifier = "==8.3.0" },
-    { name = "mypy", specifier = "==1.1.1" },
-    { name = "mypy-gitlab-code-quality", specifier = "==1.1.0" },
     { name = "ruff", specifier = "==0.1.7" },
     { name = "ty", specifier = "==0.0.15" },
 ]
