@@ -211,3 +211,5 @@ Project conventions and agreements:
 - [Imports](docs/conventions/IMPORTS.md) — architectural boundaries and layer contracts
 - [Errors](docs/conventions/ERRORS.md) — unified error handling with exception handlers
 - [Background Workers](docs/conventions/BACKGROUND_WORKER.md) — Dramatiq tasks, queues and scheduling
+- [Logging](docs/conventions/LOGGING.md) — request/response logging, log properties and middleware
+- [Pagination](docs/conventions/PAGINATION.md) — query parameters, response structures and usage
