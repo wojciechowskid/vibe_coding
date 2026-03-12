@@ -24,6 +24,7 @@ Service commands are defined in `src/manage.py` (runserver, runworker, runschedu
 - **`@classmethod` return type**: always use `Self` (from `typing`) as return type for classmethods that return an instance of the class
 - **SQLAlchemy models**: use simple types (`str`, `int`, `bool`, etc.) for columns, not enums or complex types. All validation is done at the code level (entities, services)
 - **Dramatiq tasks**: task name = `<application>_<method>_task`, periodic = `<application>_<method>_periodic_task`. Always read `docs/conventions/BACKGROUND_WORKER.md` before creating tasks
+- **UTC datetime**: use `utc_now()` from `ddutils.datetime_helpers` instead of `datetime.now(tz=timezone.utc)`
 
 ## Documentation
 
@@ -54,3 +55,5 @@ Service commands are defined in `src/manage.py` (runserver, runworker, runschedu
 - `docs/conventions/ERRORS.md`
 - `docs/conventions/IMPORTS.md`
 - `docs/conventions/BACKGROUND_WORKER.md`
+- `docs/conventions/PAGINATION.md`
+- `docs/conventions/LOGGING.md`

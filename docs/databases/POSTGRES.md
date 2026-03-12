@@ -74,6 +74,8 @@ class ProfileRepository(Repository):
             await session.execute(statement)
 ```
 
+For list endpoints with filtering, search, ordering, and pagination see [PAGINATION.md](../conventions/PAGINATION.md).
+
 For complex queries (joins, aggregations) use raw SQL via `ddsql`. 
 More details on SQL queries see in [RAW_SQL.md](./RAW_SQL.md).
 
