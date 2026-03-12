@@ -2,17 +2,17 @@ import glob
 import importlib
 import os
 from abc import ABC
+from collections.abc import Callable, Generator
 from dataclasses import dataclass
 from datetime import timedelta
 from json import dumps, loads
-from typing import Any, ClassVar, Generator
+from typing import Any, ClassVar
 
 from dramatiq import Broker, Message, get_broker
 from dramatiq.asyncio import async_to_sync
 
 from ddutils.convertors import convert_timedelta_to_milliseconds
 
-from share.dramatiq.decorators import close_db_connections_decorator
 from share.dramatiq.decorators.cron_decorator import CRONTAB_ATTRIBUTE
 
 
@@ -45,6 +45,8 @@ class BaseDramatiqFacade(ABC):
                 - 'app.*.infrastructure.ports.tasks' (single wildcard)
                 - 'app.*.*.tasks' (multiple wildcards)
                 - 'app.context.tasks' (no wildcards)
+        actor_middlewares: Tuple of async decorators to wrap each actor function.
+            Applied in order (first decorator is outermost).
 
     Example:
         # config/dramatiq.py
@@ -54,6 +56,7 @@ class BaseDramatiqFacade(ABC):
         class DramatiqFacade(BaseDramatiqFacade):
             base_dir = settings.ROOT_DIR
             module_pattern = 'app.*.infrastructure.ports.tasks'
+            actor_middlewares = (my_decorator,)
 
         dramatiq_facade_impl = DramatiqFacade()
         dramatiq_facade_impl.setup_tasks()
@@ -66,6 +69,7 @@ class BaseDramatiqFacade(ABC):
 
     base_dir: ClassVar[str]
     module_pattern: ClassVar[str]
+    actor_middlewares: ClassVar[tuple[Callable, ...]] = ()
 
     _is_setup: bool = False
 
@@ -113,7 +117,10 @@ class BaseDramatiqFacade(ABC):
             importlib.import_module(module_name)
 
         for actor in get_broker().actors.values():
-            actor.fn = async_to_sync(close_db_connections_decorator(actor.fn.__wrapped__))  # ty: ignore[unresolved-attribute]
+            fn = actor.fn.__wrapped__  # ty: ignore[unresolved-attribute]
+            for decorator in self.actor_middlewares:
+                fn = decorator(fn)
+            actor.fn = async_to_sync(fn)
 
         self._is_setup = True
 

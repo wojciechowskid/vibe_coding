@@ -4,8 +4,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from dddesign.structure.domains.errors import BaseError, CollectionError
 
+from config.databases.services.db_connections_closer import close_db_connections
 from config.entrypoints.dramatiq import dramatiq_facade_impl
 from config.logging.configure import configure_logging_handlers
+from config.logging.log_properties import log_properties_registry
 from config.settings import settings
 from config.urls import router
 
@@ -36,9 +38,15 @@ app.add_middleware(
     allow_methods=['*'],
     allow_headers=['*'],
 )
-app.add_middleware(DBConnectionsCloserMiddleware)  # ty: ignore[invalid-argument-type]
+app.add_middleware(
+    DBConnectionsCloserMiddleware,  # ty: ignore[invalid-argument-type]
+    close_db_connections=close_db_connections,
+)
 app.add_middleware(RequestResponseLoggingMiddleware)  # ty: ignore[invalid-argument-type]
-app.add_middleware(LogPropertiesManagerMiddleware)  # ty: ignore[invalid-argument-type]
+app.add_middleware(
+    LogPropertiesManagerMiddleware,  # ty: ignore[invalid-argument-type]
+    log_properties_registry=log_properties_registry,
+)
 
 dramatiq_facade_impl.setup_tasks()
 configure_logging_handlers()

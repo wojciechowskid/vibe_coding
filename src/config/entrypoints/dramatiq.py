@@ -5,11 +5,17 @@ from dramatiq.middleware.prometheus import Prometheus
 from dramatiq.results import Results
 from dramatiq.results.backends.redis import RedisBackend
 
+from config.databases.services.db_connections_closer import close_db_connections
 from config.logging.configure import configure_logging_handlers
+from config.logging.log_properties import log_properties_registry
 from config.settings import settings
 
+from share.dramatiq.actor_middlewares import (
+    close_db_connections_decorator,
+    log_properties_manager_decorator,
+    task_logging_decorator,
+)
 from share.dramatiq.facade import BaseDramatiqFacade
-from share.dramatiq.middlewares import TaskLoggingMiddleware
 
 result_backend = RedisBackend(url=str(settings.DRAMATIQ_RESULT_BACKEND_REDIS_URL))
 result_middleware = Results(
@@ -21,17 +27,7 @@ broker = RedisBroker(
     url=str(settings.DRAMATIQ_BROKER_REDIS_URL),
     health_check_interval=30,
     dead_message_ttl=24 * 60 * 60 * 1000,  # 24 hours in ms
-    middleware=[
-        AsyncIO(),
-        AgeLimit(),
-        TimeLimit(),
-        Callbacks(),
-        Retries(),
-        Pipelines(),
-        Prometheus(),
-        TaskLoggingMiddleware(),
-        result_middleware,
-    ],
+    middleware=[AsyncIO(), AgeLimit(), TimeLimit(), Callbacks(), Retries(), Pipelines(), Prometheus(), result_middleware],
 )
 
 dramatiq.set_broker(broker)
@@ -40,6 +36,11 @@ dramatiq.set_broker(broker)
 class DramatiqFacade(BaseDramatiqFacade):
     base_dir = settings.ROOT_DIR
     module_pattern = 'app.*.infrastructure.ports.tasks'
+    actor_middlewares = (
+        log_properties_manager_decorator(log_properties_registry),
+        task_logging_decorator,
+        close_db_connections_decorator(close_db_connections),
+    )
 
 
 dramatiq_facade_impl = DramatiqFacade()

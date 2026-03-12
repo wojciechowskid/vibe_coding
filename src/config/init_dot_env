@@ -11,6 +11,4 @@ KAFKA_BOOTSTRAP_SERVERS=["kafka:9092"]
 KAFKA_TOPIC_PARTITIONS_SES_EVENT=1
 KAFKA_TOPIC_PARTITIONS_PROFILE_EVENT=1
 # not represented in settings
-DB_CONNECTIONS_CLOSER_PATH=config.databases.services.db_connections_closer.close_db_connections
-LOG_PROPERTIES_REGISTRY_PATH=config.logging.log_properties.log_properties_registry
 SQL_TEMPLATES_DIR=/app/src/templates/sql/
