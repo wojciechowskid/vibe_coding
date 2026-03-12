@@ -1,18 +1,18 @@
-from functools import wraps
+from collections.abc import Awaitable, Callable
+from typing import Any
 
 from ddutils.scoped_registry import ScopedRegistry
 
+from share.dramatiq.actor_middlewares.base import BaseActorMiddleware
 
-def log_properties_manager_decorator(log_properties_registry: ScopedRegistry):
-    def decorator(func):
-        @wraps(func)
-        async def wrapper(*args, **kwargs):
-            await log_properties_registry()
-            try:
-                return await func(*args, **kwargs)
-            finally:
-                await log_properties_registry.clear()
 
-        return wrapper
+class LogPropertiesManagerMiddleware(BaseActorMiddleware):
+    def __init__(self, log_properties_registry: ScopedRegistry):
+        self.log_properties_registry = log_properties_registry
 
-    return decorator
+    async def __call__(self, call_next: Callable[..., Awaitable[Any]], *args: Any, **kwargs: Any) -> Any:
+        await self.log_properties_registry()
+        try:
+            return await call_next(*args, **kwargs)
+        finally:
+            await self.log_properties_registry.clear()

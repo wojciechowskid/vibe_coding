@@ -1,33 +1,15 @@
 import logging
-from functools import wraps
+from collections.abc import Awaitable, Callable
+from typing import Any
 
 from dramatiq import Retry
+
+from share.dramatiq.actor_middlewares.base import BaseActorMiddleware
 
 logger = logging.getLogger(__name__)
 
 
-def task_logging_decorator(func):
-    @wraps(func)
-    async def wrapper(*args, **kwargs):
-        task_name = func.__name__
-        params = _get_filtered_params(func, args, kwargs)
-
-        logger.info({'message': f'Started task {task_name}', **params})
-        try:
-            result = await func(*args, **kwargs)
-        except Retry:
-            raise
-        except Exception:
-            logger.info({'message': f'Failed task {task_name}', **params})
-            raise
-
-        logger.info({'message': f'Finished task {task_name}', **({'result': result} if result is not None else {}), **params})
-        return result
-
-    return wrapper
-
-
-def _get_filtered_params(fn, args, kwargs):
+def _get_filtered_params(fn: Callable, args: tuple, kwargs: dict) -> dict:
     try:
         params = {
             **{
@@ -43,3 +25,21 @@ def _get_filtered_params(fn, args, kwargs):
     except Exception as e:  # noqa: BLE001
         logger.error({'message': 'Getting params in dramatiq task failed', 'error': str(e)})
         return {}
+
+
+class TaskLoggingMiddleware(BaseActorMiddleware):
+    async def __call__(self, call_next: Callable[..., Awaitable[Any]], *args: Any, **kwargs: Any) -> Any:
+        task_name = call_next.__name__  # ty: ignore[unresolved-attribute]
+        params = _get_filtered_params(call_next, args, kwargs)
+
+        logger.info({'message': f'Started task {task_name}', **params})
+        try:
+            result = await call_next(*args, **kwargs)
+        except Retry:
+            raise
+        except Exception:
+            logger.info({'message': f'Failed task {task_name}', **params})
+            raise
+
+        logger.info({'message': f'Finished task {task_name}', **({'result': result} if result is not None else {}), **params})
+        return result

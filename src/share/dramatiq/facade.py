@@ -2,7 +2,7 @@ import glob
 import importlib
 import os
 from abc import ABC
-from collections.abc import Callable, Generator
+from collections.abc import Generator
 from dataclasses import dataclass
 from datetime import timedelta
 from json import dumps, loads
@@ -13,6 +13,7 @@ from dramatiq.asyncio import async_to_sync
 
 from ddutils.convertors import convert_timedelta_to_milliseconds
 
+from share.dramatiq.actor_middlewares.base import BaseActorMiddleware
 from share.dramatiq.decorators.cron_decorator import CRONTAB_ATTRIBUTE
 
 
@@ -45,8 +46,8 @@ class BaseDramatiqFacade(ABC):
                 - 'app.*.infrastructure.ports.tasks' (single wildcard)
                 - 'app.*.*.tasks' (multiple wildcards)
                 - 'app.context.tasks' (no wildcards)
-        actor_middlewares: Tuple of async decorators to wrap each actor function.
-            Applied in order (first decorator is outermost).
+        actor_middlewares: Tuple of BaseActorMiddleware instances to wrap each actor.
+            Applied in order (first middleware is outermost).
 
     Example:
         # config/dramatiq.py
@@ -56,7 +57,7 @@ class BaseDramatiqFacade(ABC):
         class DramatiqFacade(BaseDramatiqFacade):
             base_dir = settings.ROOT_DIR
             module_pattern = 'app.*.infrastructure.ports.tasks'
-            actor_middlewares = (my_decorator,)
+            actor_middlewares = (MyMiddleware(),)
 
         dramatiq_facade_impl = DramatiqFacade()
         dramatiq_facade_impl.setup_tasks()
@@ -69,7 +70,7 @@ class BaseDramatiqFacade(ABC):
 
     base_dir: ClassVar[str]
     module_pattern: ClassVar[str]
-    actor_middlewares: ClassVar[tuple[Callable, ...]] = ()
+    actor_middlewares: ClassVar[tuple[BaseActorMiddleware, ...]] = ()
 
     _is_setup: bool = False
 
@@ -118,8 +119,8 @@ class BaseDramatiqFacade(ABC):
 
         for actor in get_broker().actors.values():
             fn = actor.fn.__wrapped__  # ty: ignore[unresolved-attribute]
-            for decorator in self.actor_middlewares:
-                fn = decorator(fn)
+            for middleware in reversed(self.actor_middlewares):
+                fn = middleware.wrap(fn)
             actor.fn = async_to_sync(fn)
 
         self._is_setup = True

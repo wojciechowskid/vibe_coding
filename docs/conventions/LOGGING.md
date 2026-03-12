@@ -94,14 +94,14 @@ HTTP Request
 
 #### Dramatiq
 
-Task logging is implemented via actor middlewares (`share.dramatiq.actor_middlewares`) — async decorators that wrap each actor. Configured in `BaseDramatiqFacade.actor_middlewares`.
+Task logging is implemented via actor middlewares (`share.dramatiq.actor_middlewares`) — classes extending `BaseActorMiddleware` with a `call_next` pattern. Configured in `BaseDramatiqFacade.actor_middlewares`.
 
 ```
 Actor execution
   |
-  +- log_properties_manager_decorator  <- context initialization (request_id, duration)
+  +- LogPropertiesManagerMiddleware  <- context initialization (request_id, duration)
   |    |
-  |    +- task_logging_decorator       <- Started / Finished / Failed logging
+  |    +- TaskLoggingMiddleware      <- Started / Finished / Failed logging
   |         |
   |         +- Actor logic
   |              +- logger.info({...})  <- LogProperties automatically in every log
@@ -109,9 +109,9 @@ Actor execution
   +- LogProperties cleared
 ```
 
-**log_properties_manager_decorator** — initializes `LogProperties` (request_id, duration) for the task lifetime and clears them after. `log_properties_registry` is passed explicitly via factory.
+**LogPropertiesManagerMiddleware** — initializes `LogProperties` (request_id, duration) for the task lifetime and clears them after. `log_properties_registry` is passed explicitly via constructor.
 
-**task_logging_decorator** — logs:
+**TaskLoggingMiddleware** — logs:
 - Task start with parameters (collections are excluded from the log)
 - Task completion with result
 - Errors (except `Retry`)
