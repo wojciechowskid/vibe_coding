@@ -84,7 +84,7 @@ Converts Pydantic `ValidationError` into `CollectionError`.
 ```python
 from pydantic import ValidationError
 
-from dddesign.structure.domains.errors import wrap_error
+from dddesign.utils.base_model import wrap_error
 
 from app.profile_context.domains.dto.profile import ProfileDTO
 

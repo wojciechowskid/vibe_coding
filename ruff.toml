@@ -15,6 +15,7 @@ exclude = [
     "fabfile.py",
     "fab_utils.py",
     "**/alembic/**",
+    "**/scripts/**",
 ]
 
 # Avialable rules
@@ -67,7 +68,7 @@ line-length = 128
 [extend-per-file-ignores]
 "__init__.py" = ["F401"]
 "manage.py" = ["INP001"]
-"src/scripts/*.py" = ["T201", "INP001"]
+"src/scripts/*.py" = ["T201", "INP001", "E501"]
 
 
 [lint]

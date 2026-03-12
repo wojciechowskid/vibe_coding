@@ -1,0 +1,15 @@
+paths = ["src"]
+exclude = [
+    ".git",
+    "__pycache__",
+    ".ruff_cache",
+    ".pytest_cache",
+    ".import_linter_cache",
+    "fabfile.py",
+    "fab_utils.py",
+    "alembic",
+    "scripts",
+]
+max-complexity-allowed = 15
+failed = true
+

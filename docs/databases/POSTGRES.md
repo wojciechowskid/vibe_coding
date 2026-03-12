@@ -43,7 +43,8 @@ Simple CRUD operations use ORM via `SQLModel` in repositories.
 **Example:**
 ```python
 from dddesign.structure.infrastructure.repositories import Repository
-from sqlmodel import select
+from ddutils.datetime_helpers import utc_now
+from sqlmodel import select, update
 
 from config.databases.postgres import Atomic
 
@@ -59,6 +60,18 @@ class ProfileRepository(Repository):
             instance = ProfileModel.from_entity(profile)
             session.add(instance)
             await session.flush()
+
+    async def update(self, entity: Profile) -> None:
+        if not entity.has_changed:
+            return
+
+        async with Atomic() as session:
+            statement = (
+                update(ProfileModel)
+                .where(ProfileModel.profile_id == entity.profile_id)
+                .values(**entity.changed_data, updated_at=utc_now())
+            )
+            await session.execute(statement)
 ```
 
 For complex queries (joins, aggregations) use raw SQL via `ddsql`. 

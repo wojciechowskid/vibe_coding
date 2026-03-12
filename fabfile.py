@@ -65,13 +65,18 @@ def tests(service=BASE_SERVICE_NAME):
     _run_command_container(service, 'pytest')
 
 
+def execute(command, service=BASE_SERVICE_NAME):
+    _run_command_container(service, command)
+
+
 def linters(service=BASE_SERVICE_NAME):
     _run_command_container(
         service,
         "(cd .. && ruff . --config ruff.toml --fix && echo 'Ruff check completed'); "
         "(cd .. && ruff format . --config ruff.toml && echo 'Ruff format completed'); "
         "(cd .. && PYTHONPATH=src lint-imports --config lint-imports.toml && echo 'Import linter completed'); "
-        "(cd .. && ty check --config-file ty.toml && echo 'Ty completed'); ",
+        "(cd .. && ty check --config-file ty.toml && echo 'Ty completed'); "
+        "(cd .. && complexipy && echo 'Complexipy completed'); ",
     )
 
 

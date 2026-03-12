@@ -15,6 +15,7 @@ exclude = [
     "fabfile.py",
     "fab_utils.py",
     "**/alembic/**",
+    "**/scripts/**",
 ]
 
 [rules]
