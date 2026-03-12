@@ -47,8 +47,9 @@ class BaseSQLModel(SQLModel, Generic[EntityT], metaclass=BaseSQLModelMeta):
         return result
 
     def to_entity(self) -> EntityT:
-        return cast(EntityT, self._entity_class.model_validate(self, from_attributes=True))
+        data = {field: getattr(self, field) for field in self._entity_class.model_fields if hasattr(self, field)}
+        return cast(EntityT, self._entity_class(**data))
 
     @classmethod
     def from_entity(cls, entity: EntityT) -> Self:
-        return cls.model_validate(entity, from_attributes=True)
+        return cls.model_validate(entity.model_dump(mode='json'))

@@ -1,12 +1,13 @@
 import logging
 import os
+from collections.abc import Awaitable, Callable
 
 from starlette.types import ASGIApp, Receive, Scope, Send
 
 from ddutils.object_getter import get_object_by_path
 
 logger = logging.getLogger(__name__)
-close_db_connections = get_object_by_path(os.getenv('DB_CONNECTIONS_CLOSER_PATH'))
+close_db_connections: Callable[[], Awaitable[None]] | None = get_object_by_path(os.getenv('DB_CONNECTIONS_CLOSER_PATH'))
 
 
 class DBConnectionsCloserMiddleware:

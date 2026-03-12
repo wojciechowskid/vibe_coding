@@ -8,7 +8,6 @@ import uvicorn
 
 from dddesign.structure.domains.constants import BaseEnum
 
-from config.logging.config import LOG_CONFIG
 from config.settings import settings
 
 from alembic import command
@@ -49,17 +48,7 @@ def shell():
 
 @cli.command()
 def runserver(host: str = '0.0.0.0', port: int = 8000) -> None:
-    config = {
-        'app': 'config.entrypoints.fastapi:app',
-        'host': host,
-        'port': port,
-        'reload': settings.DEBUG,
-        'proxy_headers': True,
-    }
-    if not settings.DEBUG:
-        config['log_config'] = LOG_CONFIG
-
-    uvicorn.run(**config)  # type: ignore[arg-type]
+    uvicorn.run(app='config.entrypoints.fastapi:app', host=host, port=port, reload=settings.DEBUG, proxy_headers=True)
 
 
 @cli.command()
