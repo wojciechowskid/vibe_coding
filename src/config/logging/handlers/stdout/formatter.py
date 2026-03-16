@@ -1,5 +1,7 @@
 from pythonjsonlogger.json import JsonFormatter
 
+from dddesign.utils.base_model import flatten_model_dump
+
 from config.logging.log_properties import log_properties_registry
 
 
@@ -9,5 +11,5 @@ class CustomJsonFormatter(JsonFormatter):
 
         log_properties = log_properties_registry.get()
         if log_properties:
-            for key, value in log_properties.flat_dump().items():
+            for key, value in flatten_model_dump(log_properties, mode='json', exclude_none=True).items():
                 log_record.setdefault(key, value)

@@ -23,15 +23,6 @@ class LogProperties(ValueObject):
     def duration(self) -> float:
         return round(time.time() - self.start_time, 3)
 
-    def flat_dump(self) -> dict[str, Any]:
-        result: dict[str, Any] = {}
-        for key, value in self.model_dump(mode='json', exclude_none=True).items():
-            if isinstance(value, dict):
-                result.update({f'{key}.{nested_key}': nested_value for nested_key, nested_value in value.items()})
-            else:
-                result[key] = value
-        return result
-
 
 async def _create_log_properties(**kwargs: Any) -> LogProperties:
     return LogProperties.model_validate(kwargs)

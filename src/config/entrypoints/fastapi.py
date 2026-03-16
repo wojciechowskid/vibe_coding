@@ -21,6 +21,7 @@ from share.fastapi.middlewares import (
     DBConnectionsCloserMiddleware,
     LogPropertiesManagerMiddleware,
     RequestResponseLoggingMiddleware,
+    SentryTagsMiddleware,
 )
 
 app = FastAPI(title=settings.PROJECT_NAME, debug=settings.DEBUG, servers=[{'url': settings.SERVER_URL}])
@@ -43,6 +44,10 @@ app.add_middleware(
     close_db_connections=close_db_connections,
 )
 app.add_middleware(RequestResponseLoggingMiddleware)  # ty: ignore[invalid-argument-type]
+app.add_middleware(
+    SentryTagsMiddleware,  # ty: ignore[invalid-argument-type]
+    log_properties_registry=log_properties_registry,
+)
 app.add_middleware(
     LogPropertiesManagerMiddleware,  # ty: ignore[invalid-argument-type]
     log_properties_registry=log_properties_registry,

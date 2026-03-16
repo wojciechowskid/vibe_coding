@@ -10,7 +10,12 @@ from config.logging.configure import configure_logging_handlers
 from config.logging.log_properties import log_properties_registry
 from config.settings import settings
 
-from share.dramatiq.actor_middlewares import CloseDBConnectionsMiddleware, LogPropertiesManagerMiddleware, TaskLoggingMiddleware
+from share.dramatiq.actor_middlewares import (
+    CloseDBConnectionsMiddleware,
+    LogPropertiesManagerMiddleware,
+    SentryTagsMiddleware,
+    TaskLoggingMiddleware,
+)
 from share.dramatiq.facade import BaseDramatiqFacade
 
 result_backend = RedisBackend(url=str(settings.DRAMATIQ_RESULT_BACKEND_REDIS_URL))
@@ -34,6 +39,7 @@ class DramatiqFacade(BaseDramatiqFacade):
     module_pattern = 'app.*.infrastructure.ports.tasks'
     actor_middlewares = (
         LogPropertiesManagerMiddleware(log_properties_registry),
+        SentryTagsMiddleware(log_properties_registry),
         TaskLoggingMiddleware(),
         CloseDBConnectionsMiddleware(close_db_connections),
     )

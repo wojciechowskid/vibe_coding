@@ -1,3 +1,4 @@
 from .db_connections_closer import DBConnectionsCloserMiddleware
 from .log_properties_manager import LogPropertiesManagerMiddleware
 from .request_response_logging import RequestResponseLoggingMiddleware
+from .sentry_tags import SentryTagsMiddleware
