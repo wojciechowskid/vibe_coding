@@ -294,7 +294,7 @@ wheels = [
 
 [[package]]
 name = "dddesign"
-version = "1.1.10"
+version = "1.1.11"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ddutils" },
@@ -302,9 +302,9 @@ dependencies = [
     { name = "pydantic" },
     { name = "setuptools" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/62/5f/d05830c8d226b3850e15d09e8bdca979e3a5f6f1cae9b884e1031ce68607/dddesign-1.1.10.tar.gz", hash = "sha256:07e5fa994cfc94313c88b1a51dc4c80f8b08d43545cebf4139debb85dd9c4c51", size = 19598, upload-time = "2026-02-15T12:47:59.99Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/09/95/4cda7364b750fd082be2cfeeb1976c7c49bace52fe10a511a3447f5ebebc/dddesign-1.1.11.tar.gz", hash = "sha256:9adc402ad8e0b124ae86476a282c4606b2af9cfe687feafe7cc75049562869fa", size = 19865, upload-time = "2026-03-15T18:20:47.107Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e3/b0/4eda1323b0e6adad903f1d4656cc1b965499c05817f761f4ec361f4619fc/dddesign-1.1.10-py3-none-any.whl", hash = "sha256:12ee861dfaa3adf19f75a8ac7bddc160a94a88b3a095b4bda9d09740dcc41309", size = 28277, upload-time = "2026-02-15T12:47:58.441Z" },
+    { url = "https://files.pythonhosted.org/packages/37/85/b9f4fcd735c1f07478723dd12dd8d8fd93202ca31281f57588cbf4485aa8/dddesign-1.1.11-py3-none-any.whl", hash = "sha256:306bb913832063f68d73abba06bafa0ed961d539bafb789015cd37595499aea9", size = 28824, upload-time = "2026-03-15T18:20:45.814Z" },
 ]
 
 [[package]]
@@ -322,11 +322,11 @@ wheels = [
 
 [[package]]
 name = "ddutils"
-version = "0.1.4"
+version = "0.1.6"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f7/db/782be5e9bba53889d65e07115d9dd0eebee3d3924cf2d3dea8a191c2a551/ddutils-0.1.4.tar.gz", hash = "sha256:17ecda8c3e01ffaad2bc40001b93234a764d2466e60c60a0f77839cb412ab64a", size = 11620, upload-time = "2026-01-04T17:46:05.244Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/88/fa/ca13a429686905b6f13e8a29e7733850048321ddf6aeebc326e991bfbdd1/ddutils-0.1.6.tar.gz", hash = "sha256:e06479a24eae28dbfe4a520856ca7b823715f54ad40637e5690e4abd140c8288", size = 11843, upload-time = "2026-03-15T17:59:55.98Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b0/65/bfc2c9e7d53794ad98d66c35a8d26b31f99429ee234aecc62ec383c10584/ddutils-0.1.4-py3-none-any.whl", hash = "sha256:324d1d22990c9b6dac1cc74026f51ef835cb945a2de5eee700c3760763768f3c", size = 12943, upload-time = "2026-01-04T17:46:03.786Z" },
+    { url = "https://files.pythonhosted.org/packages/40/02/cd43a536c2fe06f10043137d5375ec734cb6ae48335d43690db51abf5c2d/ddutils-0.1.6-py3-none-any.whl", hash = "sha256:cb14378974d0acc1ab22f4bc2920a5cc8b830728969892ccfd4279ad7ca33ff9", size = 13197, upload-time = "2026-03-15T17:59:54.604Z" },
 ]
 
 [[package]]
@@ -777,9 +777,9 @@ requires-dist = [
     { name = "apscheduler", specifier = "==3.10.4" },
     { name = "clickhouse-connect", specifier = "==0.8.16" },
     { name = "clickhouse-sqlalchemy", specifier = "==0.3.2" },
-    { name = "dddesign", specifier = "==1.1.10" },
+    { name = "dddesign", specifier = "==1.1.11" },
     { name = "ddsql", specifier = "==0.0.2" },
-    { name = "ddutils", specifier = "==0.1.4" },
+    { name = "ddutils", specifier = "==0.1.6" },
     { name = "dramatiq", extras = ["redis", "watch", "prometheus"], specifier = "==2.0.1" },
     { name = "fastapi", specifier = "==0.118.1" },
     { name = "httpx", specifier = "==0.28.1" },
