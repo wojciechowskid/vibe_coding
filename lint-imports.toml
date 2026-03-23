@@ -9,6 +9,7 @@ include_external_packages = true
 name = "Context independence (contexts must not import from each other)"
 type = "independence"
 modules = [
+    "app.auth_context",
     "app.probe_context",
 ]
 ignore_imports = [
@@ -20,6 +21,7 @@ ignore_imports = [
 name = "Domain layer purity (domain must not import from fastapi, dramatiq and redis)"
 type = "forbidden"
 source_modules = [
+    "app.auth_context",
     "app.probe_context",
 ]
 forbidden_modules = [
@@ -42,6 +44,7 @@ ignore_imports = [
 name = "Layers contract"
 type = "layers"
 containers = [
+    "app.auth_context",
     "app.probe_context",
 ]
 layers = [

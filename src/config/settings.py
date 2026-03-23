@@ -46,6 +46,11 @@ class Settings(BaseSettings):
 
     SENTRY_DSN: HttpUrl | None = None
 
+    JWT_SECRET_KEY: str
+    JWT_ALGORITHM: str = 'HS256'
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
+    JWT_REFRESH_TOKEN_EXPIRE_MINUTES: int = 10080  # 7 days
+
     @field_validator('KAFKA_BOOTSTRAP_SERVERS', mode='before')
     @classmethod
     def parse_kafka_bootstrap_servers(cls, v: str | list) -> list:
