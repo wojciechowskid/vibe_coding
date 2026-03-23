@@ -1,0 +1,3 @@
+from app.auth_context.infrastructure.ports.tasks.email_notification import email_notification_send_registration_email_task
+
+__all__ = ['email_notification_send_registration_email_task']

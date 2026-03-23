@@ -1,5 +1,6 @@
 from dddesign.structure.applications import Application
 
+from config.entrypoints.dramatiq import dramatiq_facade_impl
 from config.settings import settings
 
 from app.auth_context.applications.user import UserApp, user_app_impl
@@ -42,6 +43,9 @@ class AuthApp(Application):
 
         hashed_password = HashPasswordService(password=data.password).handle()
         user = await self.user_app.create(email=data.email, hashed_password=hashed_password)
+
+        dramatiq_facade_impl.send_task('email_notification_send_registration_email_task', email=data.email)
+
         return self._generate_token_pair(user_id=str(user.user_id))
 
     async def login(self, email: str, password: str) -> TokenPair:
